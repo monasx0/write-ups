@@ -7,7 +7,6 @@ image: /assets/img/writeups/covers/pickle-rick.jpg
 ---
 
 # Pickle Rick - TryHackMe
-**Link**: https://tryhackme.com/room/picklerick
 ![1.png](/assets/img/writeups/pickle-rick/1.png)
 **Difficulty**: Easy<br>**Time Required**: 25 min
 ## Reconnaissance
