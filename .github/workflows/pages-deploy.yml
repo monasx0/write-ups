@@ -57,7 +57,7 @@ jobs:
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: "_site${BASE_PATH}"
+          path: "_site${{ env.BASE_PATH }}"
 
   deploy:
     environment:
