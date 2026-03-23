@@ -3,6 +3,7 @@ title: "Simple CTF - TryHackMe"
 date: 2026-03-21 10:35:00 +0000
 categories: [TryHackMe, Writeups]
 tags: [ctf, web, sqli, ssh, privilege-escalation]
+image: /assets/img/writeups/covers/simple-ctf.jpeg
 ---
 
 # Simple CTF - TryHackMe

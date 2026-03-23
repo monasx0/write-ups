@@ -3,6 +3,7 @@ title: "Pickle Rick - TryHackMe"
 date: 2026-03-23 09:00:00 +0000
 categories: [TryHackMe, Writeups]
 tags: [ctf, web, command-injection, privilege-escalation]
+image: /assets/img/writeups/covers/pickle-rick.jpeg
 ---
 
 # Pickle Rick - TryHackMe

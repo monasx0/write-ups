@@ -3,6 +3,7 @@ title: "Easy Peasy - TryHackMe"
 date: 2026-03-22 10:30:00 +0000
 categories: [TryHackMe, Writeups]
 tags: [ctf, web, ssh, steganography, privilege-escalation]
+image: /assets/img/writeups/covers/easy-peasy.png
 ---
 
 # Easy Peasy - TryHackMe
