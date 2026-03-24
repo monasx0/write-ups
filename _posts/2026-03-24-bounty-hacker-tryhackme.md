@@ -1,6 +1,6 @@
 ---
 title: "Bounty Hacker - TryHackMe"
-date: 2026-03-24 02:17:00 +0000
+date: 2026-03-24 02:31:00 +0000
 categories: [TryHackMe, Writeups]
 tags: [brute-force, ftp, ssh, privilege-escalation]
 image: /assets/img/writeups/covers/bounty-hacker.jpeg
