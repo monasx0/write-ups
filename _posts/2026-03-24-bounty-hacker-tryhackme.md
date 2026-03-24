@@ -6,9 +6,8 @@ tags: [brute-force, ftp, ssh, privilege-escalation]
 image: /assets/img/writeups/covers/bounty-hacker.jpeg
 ---
 # Bounty Hacker - TryHackMe
-**Link**: 
 ![1.png](/assets/img/writeups/bounty-hacker/1.png)
-**Difficulty**: Easy<br>**Time Required**: 35 min
+**Difficulty**: Easy<br>**Time Required**: 35 min<br>
 [Bounty Hacker](https://tryhackme.com/room/bountyhacker) is an easy-level room that introduces basic penetration testing techniques. In this challenge, we start with reconnaissance to discover open services like FTP and SSH, gain initial access by retrieving sensitive files, and use password attacks to log in. Finally, we perform privilege escalation using a misconfigured sudo permission to obtain root access.
 ## Reconnaissance
 Scanning with `nmap`
