@@ -47,6 +47,7 @@ The `robots.txt` file is meant for search engines, but developers often accident
 **Accessing it revealed**:
 - fsocity.dic
 - key-1-of-3.txt
+
 ### Retrieving the First Key
 Accessing the file directly through the browser reveals the first key.
 ```
