@@ -58,6 +58,7 @@ http://10.65.168.149/key-1-of-3.txt
 The `fsocity.dic` file contained a large list of usernames and passwords mixed together.
 **Important observation:**
 - Many entries were duplicated
+
 ### Optimizing the Wordlist
 To improve efficiency, I removed duplicates:
 ````
