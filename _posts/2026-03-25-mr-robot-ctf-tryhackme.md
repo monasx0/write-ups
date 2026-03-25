@@ -3,7 +3,7 @@ title: "Mr Robot CTF - TryHackMe"
 date: 2026-03-24 02:58:00 +0000
 categories: [TryHackMe, Writeups]
 tags: [brute-force, caido, gobuster, privilege-escalation]
-image: /assets/img/writeups/covers/mr-robot-ctf.jpeg
+image: /assets/img/writeups/covers/mr-robot-ctf.jpg
 ---
 # Mr Robot CTF - TryHackMe
 ![1.png](/assets/img/writeups/mr-robot-ctf/1.png)
