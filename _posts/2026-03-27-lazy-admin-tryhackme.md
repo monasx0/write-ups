@@ -1,12 +1,12 @@
 ---
 title: "LazyAdmin - TryHackMe"
-date: 2026-03-27 02:30:00 +0000
+date: 2026-03-27 02:40:00 +0000
 categories: [TryHackMe, Writeups]
 tags: [nmap, gobuster, ctf, privilege-escalation]
 image: /assets/img/writeups/covers/lazy-admin.jpeg
 ---
 # LazyAdmin - TryHackme
-![1.png](/assets/img/writeups/colddbox-easy/1.png)
+![1.png](/assets/img/writeups/lazy-admin/1.png)
 **Difficulty**: Easy <br>**Time Required** : 37 min
 ## Reconnaissance
 Started with an Nmap scan to identify open ports and services: `nmap -p- 10.67.128.235 -sV -T4`
@@ -32,7 +32,7 @@ Visiting the web server:
 ````
 http://10.67.128.235
 ````
-![1.png](/assets/img/writeups/colddbox-easy/4.png)
+![1.png](/assets/img/writeups/lazy-admin/4.png)
 An Apache default page.
 ## Directory Brute Forcing
 Use gobuster to find hidden directories:
@@ -40,12 +40,12 @@ Use gobuster to find hidden directories:
 $ gobuster dir -u 10.67.160.222 -w /usr/share/wordlists/dirb/common.txt -t 60
 ```
 A hidden directory `/content` was found.
-![1.png](/assets/img/writeups/colddbox-easy/5.png)
+![1.png](/assets/img/writeups/lazy-admin/5.png)
 Nothing special.<br>Run gobuster again on this directory:
 ````
 $ gobuster dir -u 10.67.128.235/content -w /usr/share/wordlists/dirb/common.txt -t 60
 ````
-![1.png](/assets/img/writeups/colddbox-easy/6.png)
+![1.png](/assets/img/writeups/lazy-admin/6.png)
 **Discovered Paths**:
 - /images
 - /js
@@ -57,16 +57,16 @@ $ gobuster dir -u 10.67.128.235/content -w /usr/share/wordlists/dirb/common.txt 
 ### Finding Sensitive Data
 
 Inside: `/content/inc`<br>We find a MySQL backup file: `mysql-bakup_20191129023059–1.5.1.sql`
-![1.png](/assets/img/writeups/colddbox-easy/8.png)
+![1.png](/assets/img/writeups/lazy-admin/8.png)
 Download and inspect it:
-![1.png](/assets/img/writeups/colddbox-easy/9.png)
+![1.png](/assets/img/writeups/lazy-admin/9.png)
 
 **Credentials Found**
 - Username: manager
 - Password (hash): 42f749ade7f9e195bf475f37a44cafcb
 
 Crack the hash using CrackStation.
-![1.png](/assets/img/writeups/colddbox-easy/7.png)
+![1.png](/assets/img/writeups/lazy-admin/7.png)
 ## Admin Panel
 
 Navigate to:
@@ -77,8 +77,8 @@ Login using the cracked credentials.
 
 ### Initial Access
 Inside the panel, create a new post and upload a [PHP reverse shell](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php).<br>Since `.php` is blocked, bypass it by using `.phtml` extension.
-![10.png](../_resources/10.png)
-![11.png](../_resources/11.png)
+![1.png](/assets/img/writeups/lazy-admin/10.png)
+![1.png](/assets/img/writeups/lazy-admin/11.png)
 Upload the file and start a listener:
 ````
 $ nc -lvnp 1234
@@ -88,8 +88,8 @@ Execute the file from:
 ````
 http://10.67.128.235/content/attachments/
 ````
-![1.png](/assets/img/writeups/colddbox-easy/12.png)
-![1.png](/assets/img/writeups/colddbox-easy/2.png)
+![1.png](/assets/img/writeups/lazy-admin/12.png)
+![1.png](/assets/img/writeups/lazy-admin/2.png)
 Search and retrieve the user flag:
 ```
 $ cat /home/itguy/user.txt
@@ -122,5 +122,5 @@ Run `backup.pl` to execute `copy.sh`
 ```
 $ sudo /usr/bin/perl /home/itguy/backup.pl
 ```
-![1.png](/assets/img/writeups/colddbox-easy/13.png)
-![1.png](/assets/img/writeups/colddbox-easy/14.png)
+![1.png](/assets/img/writeups/lazy-admin/13.png)
+![1.png](/assets/img/writeups/lazy-admin/14.png)
