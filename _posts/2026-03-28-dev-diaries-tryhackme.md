@@ -3,7 +3,7 @@ title: "Dev Diaries - TryHackMe"
 date: 2026-03-29 02:00:00 +0000
 categories: [TryHackMe, Writeups]
 tags: [osint, github, ctf, crt.sh]
-image: /assets/img/writeups/covers/dev-diariesm.png
+image: /assets/img/writeups/covers/dev-diaries.png
 ---
 # Dev Diaries - TryHackMe
 ![1.png](/assets/img/writeups/dev-diaries/1.png)
