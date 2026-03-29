@@ -99,7 +99,7 @@ theme_mode: # [light | dark]
 # e.g. 'https://cdn.com'
 cdn:
 
-avatar: /assets/img/profile/musashi.jpeg
+avatar: /assets/img/profile/cropped_circle_image.png
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
