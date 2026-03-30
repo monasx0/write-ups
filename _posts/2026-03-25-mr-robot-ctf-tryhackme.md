@@ -55,8 +55,7 @@ http://10.65.168.149/key-1-of-3.txt
 ```
 ![1.png](/assets/img/writeups/mr-robot-ctf/4.png)
 ## fsocity.dic
-The `fsocity.dic` file contained a large list of usernames and passwords mixed together.
-**Important observation:**
+The `fsocity.dic` file contained a large list of usernames and passwords mixed together.<br>**Important observation:**
 - Many entries were duplicated
 
 ### Optimizing the Wordlist
@@ -119,8 +118,7 @@ $ cat /home/robot/key-2-of-3.txt
 822c7-----------------------f959
 ````
 ## Privilege Escalation
-Next goal is to get root access.
-**Understanding SUID Permissions**<br>SUID (Set User ID) binaries are a special type of executable file in Linux/Unix operating systems that allow users to run a program with the permissions of the file owner rather than the user who is running it.<br>**Searching for SUID Binaries**
+Next goal is to get root access.<br>**Understanding SUID Permissions**<br>SUID (Set User ID) binaries are a special type of executable file in Linux/Unix operating systems that allow users to run a program with the permissions of the file owner rather than the user who is running it.<br>**Searching for SUID Binaries**
 ````
 $ find / -perm /6000 2>/dev/null | grep '/bin/'
 /bin/umount
