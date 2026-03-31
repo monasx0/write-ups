@@ -1,5 +1,5 @@
 ---
-title: "Insp3ct0rIgnite - picoCTF"
+title: "Insp3ct0r - picoCTF"
 date: 2026-03-29 02:00:00 +0000
 categories: [picoCTF, Writeups]
 tags: [js, css, html, inspect]
