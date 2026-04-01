@@ -21,6 +21,8 @@ $ nmap -sC -sV 10.49.133.217
 
 - `-sC` Runs Nmap’s default set of NSE 
 - `-sV` Enables service version detection
+
+
 ````
 $ nmap -sC -sV 10.49.133.217        
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-04-01 07:17 +0500
