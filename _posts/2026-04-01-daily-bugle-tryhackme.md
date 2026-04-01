@@ -53,6 +53,8 @@ Nmap done: 1 IP address (1 host up) scanned in 22.28 seconds
 - **80 (HTTP)**: Apache 2.4.6 (CentOS) with PHP 5.6.40, Joomla CMS detected
 - **3306 (MySQL)**: MariaDB (10.3.23 or earlier), requires authentication
 - `robots.txt` reveals multiple restricted directories for enumeration
+
+
 ## Web Enumeration
 Visiting the web server on port 80 reveals the Daily Bugle homepage, which provides information about who robbed the bank.
 ![1.png](/assets/img/writeups/daily-bugle/3.png)
