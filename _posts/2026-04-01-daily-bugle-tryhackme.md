@@ -2,7 +2,7 @@
 title: "Daily Bugle - TryHackMe"
 date: 2026-04-01 02:00:00 +0000
 categories: [TryHackMe, Writeups]
-tags: [nmap, privilege escalation, ctf, joomla]
+tags: [nmap, privilege-escalation, ctf, joomla]
 image: /assets/img/writeups/covers/daily-bugle.png
 ---
 # Daily Bugle - TryHackMe
@@ -10,9 +10,7 @@ image: /assets/img/writeups/covers/daily-bugle.png
 **Difficulty**: Hard<br>**Time Required**: 45 min
 ## Overview
 ![1.png](/assets/img/writeups/daily-bugle/2.png)
-[Daily Bugle](https://tryhackme.com/room/dailybugle) is a hands-on TryHackMe room focused on web exploitation and privilege escalation. It involves enumerating a Joomla-based website, identifying known vulnerabilities, and leveraging them to gain initial access. The challenge then progresses into basic privilege escalation to obtain higher-level access and capture the flags.
-🛠️Tools Used: nmap, joomscan, joomblah, gtfobins
-🔴 Warning: This write-up contains full solutions and flag locations. Attempt the room yourself before reading further.
+[Daily Bugle](https://tryhackme.com/room/dailybugle) is a hands-on TryHackMe room focused on web exploitation and privilege escalation. It involves enumerating a Joomla-based website, identifying known vulnerabilities, and leveraging them to gain initial access. The challenge then progresses into basic privilege escalation to obtain higher-level access and capture the flags.<br>🛠️ Tools Used: nmap, joomscan, joomblah, gtfobins<br>🔴 Warning: This write-up contains full solutions and flag locations. Attempt the room yourself before reading further.
 ## Nmap scan
 Performed an Nmap scan to identify open ports and services running on the target system.
 ````
