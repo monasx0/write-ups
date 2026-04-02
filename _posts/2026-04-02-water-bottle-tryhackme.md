@@ -3,7 +3,7 @@ title: "Water Bottle - TryHackMe"
 date: 2026-04-02 02:00:00 +0000
 categories: [TryHackMe, Writeups]
 tags: [osint, google-maps, google-earth]
-image: /assets/img/writeups/covers/water-bottle.png
+image: /assets/img/writeups/covers/tryhackme-logo.png
 ---
 # Water Bottle — TryHackMe
 ![1.png](/assets/img/writeups/water-bottle/1.png)
