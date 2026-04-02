@@ -3,7 +3,7 @@ title: "Ignite - TryHackMe"
 date: 2026-03-28 01:17:00 +0000
 categories: [TryHackMe, Writeups]
 tags: [nmap, rce, reverse-shell, privilege-escalation]
-image: /assets/img/writeups/covers/ignite.png
+image: /assets/img/writeups/covers/tryhackme-logo.png
 ---
 # Ignite - TryHackMe
 ![1.png](/assets/img/writeups/ignite/1.png)

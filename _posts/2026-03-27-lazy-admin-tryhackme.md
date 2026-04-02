@@ -3,7 +3,7 @@ title: "LazyAdmin - TryHackMe"
 date: 2026-03-27 02:40:00 +0000
 categories: [TryHackMe, Writeups]
 tags: [nmap, gobuster, ctf, privilege-escalation]
-image: /assets/img/writeups/covers/lazy-admin.jpeg
+image: /assets/img/writeups/covers/tryhackme-logo.png
 ---
 # LazyAdmin - TryHackme
 ![1.png](/assets/img/writeups/lazy-admin/1.png)
