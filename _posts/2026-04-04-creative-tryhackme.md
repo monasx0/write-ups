@@ -6,7 +6,7 @@ tags: [csrf, lfi, privilege-escalation, ssh]
 image: /assets/img/writeups/covers/creative.svg
 ---
 # Creative — TryHackMe Write-up
-
+![1.png](/assets/img/writeups/creative/0.png)
 **Platform:** TryHackMe<br>**Difficulty:** Medium<br>**Category:** Web Application
 
 ---
@@ -68,14 +68,15 @@ Browsing to `http://creative.thm` shows a basic website. Standard directory bust
 $ ffuf -w /usr/share/wordlists/dirb/common.txt -u http://creative.thm -H "Host: FUZZ.creative.thm" -fs 6
 ```
 
-The `-fs 6` flag filters out responses with 6 bytes — this removes false positives that return the same default page.<br><br>**Result:** A subdomain is discovered — `beta.creative.thm`<br><br>Add it to `/etc/hosts`:
+The `-fs 6` flag filters out responses with 6 bytes — this removes false positives that return the same default page.<br><br>**Result:** A subdomain is discovered — `beta.creative.thm`
+
+![1.png](/assets/img/writeups/creative/2.png)
+
+Add it to `/etc/hosts`:
 
 ```
 $ echo "10.48.189.74 beta.creative.thm" >> /etc/hosts
 ```
-
-![1.png](/assets/img/writeups/creative/2.png)
-
 ---
 
 ## Phase 2: Exploiting SSRF for User Access
