@@ -3,7 +3,7 @@ title: "Meow - HackTheBox"
 date: 2026-04-08 02:00:00 +0000
 categories: [HackTheBox, Writeups]
 tags: [openvpn, telnet, nmap]
-image: /assets/img/writeups/covers/hackthebox.png
+image: /assets/img/writeups/covers/hackthebox.jpeg
 ---
 # Meow - HackTheBox
 ![1.png](/assets/img/writeups/hack-the-box/Meow/1.png)
