@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HTB — Meow Write-up | monasx0</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #00ff9f;
+      --green-dim: #00c97a;
+      --green-bg: rgba(0,255,159,0.07);
+      --green-border: rgba(0,255,159,0.2);
+      --dark: #0a0e0c;
+      --card: #0f1611;
+      --card2: #141c16;
+      --text: #c8d8cc;
+      --muted: #6a8a72;
+      --font-mono: 'Share Tech Mono', monospace;
+      --font-display: 'Syne', sans-serif;
+    }
+    html, body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: var(--font-mono);
+      min-height: 100vh;
+    }
+    body {
+      padding: 2rem 1rem 4rem;
+    }
+    .wr-root {
+      background: var(--dark);
+      color: var(--text);
+      font-family: var(--font-mono);
+      padding: 2.5rem 2rem 3rem;
+      border-radius: 12px;
+      border: 1px solid var(--green-border);
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .scanline {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,159,0.015) 2px, rgba(0,255,159,0.015) 4px);
+      pointer-events: none; z-index: 0;
+    }
+    .content { position: relative; z-index: 1; }
+    .top-bar {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 2rem;
+      font-size: 11px; color: var(--muted); letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .dots { display: flex; gap: 5px; margin-right: 8px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); display: inline-block; }
+    .dot.y { background: #ffcc00; } .dot.r { background: #ff5f57; }
+    .title-block { margin-bottom: 2rem; }
+    .badge-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+    .badge {
+      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 3px; border: 1px solid;
+      font-family: var(--font-mono);
+    }
+    .badge-green { color: var(--green); border-color: var(--green-border); background: var(--green-bg); }
+    .badge-gray { color: var(--muted); border-color: rgba(106,138,114,0.3); background: rgba(106,138,114,0.07); }
+    h1 {
+      font-family: var(--font-display); font-size: clamp(26px,5vw,42px); font-weight: 700;
+      color: var(--green); letter-spacing: -1px; line-height: 1.1;
+      text-shadow: 0 0 30px rgba(0,255,159,0.3);
+      margin-bottom: 0.3rem;
+    }
+    .subtitle { font-size: 13px; color: var(--muted); letter-spacing: 1px; }
+    .divider { height: 1px; background: var(--green-border); margin: 1.5rem 0; }
+    .intro-box {
+      background: var(--card); border: 1px solid var(--green-border); border-left: 3px solid var(--green);
+      border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: 2rem;
+      font-size: 13px; line-height: 1.8; color: var(--text);
+    }
+    .intro-box p + p { margin-top: 0.5rem; }
+    .section-label {
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--green); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--green-border); }
+    .qa-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .qa-card {
+      background: var(--card); border: 1px solid rgba(0,255,159,0.12); border-radius: 8px;
+      overflow: hidden; transition: border-color 0.2s;
+    }
+    .qa-card:hover { border-color: rgba(0,255,159,0.35); }
+    .qa-q {
+      padding: 0.75rem 1rem; font-size: 12px; color: var(--muted);
+      border-bottom: 1px solid rgba(0,255,159,0.08);
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .qa-q-num { color: var(--green); font-size: 10px; letter-spacing: 1px; min-width: 24px; margin-top: 1px; }
+    .qa-a { padding: 0.6rem 1rem 0 2.3rem; font-size: 14px; font-weight: 600; color: var(--green); letter-spacing: 0.5px; }
+    .qa-note { padding: 0.3rem 1rem 0.75rem 2.3rem; font-size: 11px; color: var(--muted); line-height: 1.6; }
+    .flag-section {
+      background: var(--card2); border: 1px solid var(--green-border); border-top: 3px solid var(--green);
+      border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 2rem;
+    }
+    .flag-title {
+      font-family: var(--font-display); font-size: 16px; color: var(--green);
+      margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px;
+    }
+    .terminal-block {
+      background: #060a07; border: 1px solid rgba(0,255,159,0.15); border-radius: 6px;
+      padding: 1rem; font-size: 12px; line-height: 1.9; margin-top: 0.75rem;
+    }
+    .t-prompt { color: var(--green); }
+    .t-cmd { color: #e0ffe8; }
+    .t-out { color: var(--muted); }
+    .t-flag { color: #ffcc00; font-weight: 600; }
+    .t-comment { color: rgba(106,138,114,0.5); }
+    .img-note {
+      margin-top: 0.75rem; padding: 0.6rem 1rem;
+      background: rgba(0,255,159,0.04); border: 1px dashed rgba(0,255,159,0.15);
+      border-radius: 5px; font-size: 11px; color: var(--muted); line-height: 1.6;
+    }
+    .takeaway-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;
+      margin-bottom: 2rem;
+    }
+    .tk-card { background: var(--card); border: 1px solid rgba(0,255,159,0.12); border-radius: 7px; padding: 0.9rem 1rem; }
+    .tk-label { font-size: 10px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+    .tk-val { font-size: 13px; color: var(--green); }
+    .summary-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 1.5rem; }
+    .summary-table th {
+      text-align: left; padding: 6px 10px; color: var(--green);
+      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      border-bottom: 1px solid var(--green-border);
+    }
+    .summary-table td { padding: 7px 10px; border-bottom: 1px solid rgba(0,255,159,0.06); color: var(--text); vertical-align: top; }
+    .summary-table tr:last-child td { border-bottom: none; }
+    .summary-table .ans { color: var(--green); }
+    .footer-bar {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+      padding-top: 1rem; border-top: 1px solid var(--green-border);
+      font-size: 10px; color: var(--muted); letter-spacing: 1px;
+    }
+    /* Screenshots section */
+    .screenshots-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;
+      margin-top: 0.75rem;
+    }
+    .screenshot-slot {
+      background: #060a07; border: 1px dashed rgba(0,255,159,0.2);
+      border-radius: 6px; height: 140px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 6px; color: var(--muted); font-size: 11px; text-align: center; padding: 1rem;
+    }
+    .screenshot-slot .icon { font-size: 22px; opacity: 0.4; }
+  </style>
+</head>
+<body>
+<div class="wr-root">
+  <div class="scanline"></div>
+  <div class="content">
+
+    <div class="top-bar">
+      <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot"></span></div>
+      PHANTOM — HTB WRITE-UP
+    </div>
+
+    <div class="title-block">
+      <div class="badge-row">
+        <span class="badge badge-green">HackTheBox</span>
+        <span class="badge badge-green">Starting Point</span>
+        <span class="badge badge-gray">Tier 0</span>
+        <span class="badge badge-gray">Very Easy</span>
+        <span class="badge badge-gray">Linux</span>
+      </div>
+      <h1>Meow</h1>
+      <div class="subtitle">// First HTB challenge — telnet misconfiguration &amp; default credentials</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="intro-box">
+      <p>After spending time sharpening skills on TryHackMe CTFs, I decided to branch out and give HackTheBox a try. On my first day, the <strong style="color:var(--green)">Meow</strong> challenge from the Starting Point appeared — an approachable beginner box designed to get you comfortable with the HTB environment.</p>
+      <p>This write-up covers the complete walkthrough: from setting up the VPN connection and running initial reconnaissance, to discovering a misconfigured Telnet service and catching the flag. Tools used: <code style="color:var(--green);font-size:12px">openvpn</code>, <code style="color:var(--green);font-size:12px">ping</code>, <code style="color:var(--green);font-size:12px">nmap</code>, <code style="color:var(--green);font-size:12px">telnet</code>.</p>
+    </div>
+
+    <div class="section-label">guided questions</div>
+    <div class="qa-list">
+
+      <div class="qa-card">
+        <div class="qa-q"><span class="qa-q-num">Q1</span>What does the acronym VM stand for?</div>
+        <div class="qa-a">Virtual Machine</div>
+        <div class="qa-note">A software-based emulation of a physical computer. HTB uses VMs as both the attacker and target environment.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="qa-q"><span class="qa-q-num">Q2</span>What tool do we use to interact with the OS via command line — also called a console or shell?</div>
+        <div class="qa-a">Terminal</div>
+        <div class="qa-note">The terminal is where everything happens in CTFs — running tools, reading output, catching flags.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="qa-q"><span class="qa-q-num">Q3</span>What service do we use to form our VPN connection into HTB labs?</div>
+        <div class="qa-a">OpenVPN</div>
+        <div class="qa-note">Just like TryHackMe, HTB requires a VPN tunnel to reach lab machines. Download a .ovpn config file and connect using <code style="color:var(--green);font-size:11px">openvpn &lt;file.ovpn&gt;</code> in your terminal.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="qa-q"><span class="qa-q-num">Q4</span>What tool do we use to test our connection to the target with an ICMP echo request?</div>
+        <div class="qa-a">Ping</div>
+        <div class="qa-note">Before running any heavy recon tools, a quick <code style="color:var(--green);font-size:11px">ping &lt;target-ip&gt;</code> confirms the machine is alive and reachable.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="qa-q"><span class="qa-q-num">Q5</span>What is the most common tool for finding open ports on a target?</div>
+        <div class="qa-a">Nmap</div>
+        <div class="qa-note">The industry-standard network scanner. Used for discovering open ports, running services, OS fingerprinting, and much more.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="qa-q"><span class="qa-q-num">Q6</span>What service do we identify on port 23/tcp during our scans?</div>
+        <div class="qa-a">Telnet</div>
+        <div class="qa-note">Port 23 is the well-known port for Telnet — an older, unencrypted remote access protocol. Seeing it open is immediately a red flag in a CTF environment.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="qa-q"><span class="qa-q-num">Q7</span>What username is able to log into the target over Telnet with a blank password?</div>
+        <div class="qa-a">root</div>
+        <div class="qa-note">In misconfigured or default setups, the root account sometimes has no password set — giving direct administrative access. This is exactly the kind of misconfiguration that earns findings in real-world bug bounty programs too.</div>
+      </div>
+
+    </div>
+
+    <div class="section-label">flag capture</div>
+    <div class="flag-section">
+      <div class="flag-title">&#9873; Catching the flag</div>
+      <p style="font-size:12px;color:var(--muted);line-height:1.7">After confirming port 23 is open with <code style="color:var(--green)">nmap</code>, we connect via Telnet using <code style="color:var(--green)">root</code> with no password. Once inside the shell, the flag file is retrieved with a simple <code style="color:var(--green)">cat</code> command.</p>
+      <div class="terminal-block">
+        <div><span class="t-prompt">$ </span><span class="t-cmd">nmap -sV &lt;TARGET-IP&gt;</span></div>
+        <div class="t-out">PORT   STATE SERVICE VERSION</div>
+        <div class="t-out">23/tcp open  telnet  Linux telnetd</div>
+        <br>
+        <div><span class="t-prompt">$ </span><span class="t-cmd">telnet &lt;TARGET-IP&gt;</span></div>
+        <div class="t-out">Trying &lt;TARGET-IP&gt;...</div>
+        <div class="t-out">Connected to &lt;TARGET-IP&gt;.</div>
+        <div class="t-out">login: <span style="color:#e0ffe8">root</span></div>
+        <div class="t-out">Password: <span class="t-comment">[left blank — press Enter]</span></div>
+        <div class="t-out">Welcome to Ubuntu...</div>
+        <br>
+        <div><span class="t-prompt">root@Meow:~# </span><span class="t-cmd">ls</span></div>
+        <div class="t-out">flag.txt</div>
+        <div><span class="t-prompt">root@Meow:~# </span><span class="t-cmd">cat flag.txt</span></div>
+        <div class="t-flag"><!-- REPLACE WITH YOUR ACTUAL FLAG --></div>
+      </div>
+
+      <!-- SCREENSHOTS: replace the placeholder slots below with your actual <img> tags -->
+      <div style="margin-top:1rem;">
+        <div style="font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">screenshots</div>
+        <div class="screenshots-grid">
+          <div class="screenshot-slot">
+            <!-- Replace this div with: <img src="your-nmap-screenshot.png" style="width:100%;border-radius:6px;"> -->
+            <span class="icon">&#128247;</span>
+            <span>nmap scan output<br><em style="opacity:0.5">replace with img tag</em></span>
+          </div>
+          <div class="screenshot-slot">
+            <!-- Replace this div with: <img src="your-telnet-screenshot.png" style="width:100%;border-radius:6px;"> -->
+            <span class="icon">&#128247;</span>
+            <span>telnet login<br><em style="opacity:0.5">replace with img tag</em></span>
+          </div>
+          <div class="screenshot-slot">
+            <!-- Replace this div with: <img src="your-flag-screenshot.png" style="width:100%;border-radius:6px;"> -->
+            <span class="icon">&#128247;</span>
+            <span>flag captured<br><em style="opacity:0.5">replace with img tag</em></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">quick reference</div>
+    <table class="summary-table">
+      <thead>
+        <tr><th>Question</th><th>Answer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>VM stands for</td><td class="ans">Virtual Machine</td></tr>
+        <tr><td>Command-line interface tool</td><td class="ans">Terminal</td></tr>
+        <tr><td>VPN service used</td><td class="ans">OpenVPN</td></tr>
+        <tr><td>Connectivity test tool</td><td class="ans">Ping</td></tr>
+        <tr><td>Port scanning tool</td><td class="ans">Nmap</td></tr>
+        <tr><td>Service on port 23</td><td class="ans">Telnet</td></tr>
+        <tr><td>Username with blank password</td><td class="ans">root</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-label">key takeaways</div>
+    <div class="takeaway-grid">
+      <div class="tk-card"><div class="tk-label">Vulnerability</div><div class="tk-val">Default / blank credentials on Telnet</div></div>
+      <div class="tk-card"><div class="tk-label">Attack vector</div><div class="tk-val">Unauthenticated root shell via Telnet</div></div>
+      <div class="tk-card"><div class="tk-label">Recon tools</div><div class="tk-val">ping → nmap → telnet</div></div>
+      <div class="tk-card"><div class="tk-label">Lesson</div><div class="tk-val">Always check for open legacy protocols + default creds</div></div>
+    </div>
+
+    <div class="footer-bar">
+      <span>monasx0 · HackTheBox Starting Point</span>
+      <span>Meow — Tier 0 · Very Easy · Linux</span>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
