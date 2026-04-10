@@ -1,6 +1,6 @@
 ---
 title: "0day - TryHackMe"
-date: 2026-04-06 02:00:00 +0000
+date: 2026-04-09 02:00:00 +0000
 categories: [TryHackMe, Writeups]
 tags: [privilege escalation, CVE-2014-6271, CVE-2015-1328]
 image: /assets/img/writeups/covers/0day.jpeg
