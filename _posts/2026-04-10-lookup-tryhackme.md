@@ -57,6 +57,8 @@ GNU nano 8.7.1	    /etc/hosts
 10.112.136.63 lookup.thm files.lookup.thm
 ````
 > The target machine stopped responding during testing, so Irestarted it to continue the exploitation process.
+
+
 ### ElFinder File Manager
 After logging in through the browser, I was presented with an elFinder web interface, a browser-based file manager.<br><br>While exploring its features, I checked the **About this software** section and discovered the version: `elFinder 2.1.47`
 ![1.png](/assets/img/writeups/lookup/8.png)
