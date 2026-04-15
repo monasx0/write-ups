@@ -22,7 +22,7 @@ You are a **Security Analyst at West Tech**, a classified defence and R&D contra
 - Neutralise the threat and retrieve the flag
 
 
-<br>You are given two resources:
+You are given two resources:
 1. **SSH access** to the affected workstation
 2. **An AI IR assistant** accessible via browser at `http://10.49.140.138:7860` — it has access to the same filesystem and can be queried like a chatbot to help with the investigation
 
