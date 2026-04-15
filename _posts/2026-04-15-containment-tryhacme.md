@@ -3,7 +3,7 @@ title: "ContAInment - TryHackMe"
 date: 2026-04-15 02:00:00 +0000
 categories: [TryHackMe, Writeups]
 tags: [ai, forensics, pcap, strings]
-image: /assets/img/writeups/covers/brute-it.jpg
+image: /assets/img/writeups/covers/containment.png
 ---
 # ContAInment - TryHackMe
 ![1.png](/assets/img/writeups/containment/1.png)
