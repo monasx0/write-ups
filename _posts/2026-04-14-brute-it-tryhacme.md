@@ -7,8 +7,7 @@ image: /assets/img/writeups/covers/brute-it.jpg
 ---
 # Brute it - TryHackMe
 ![1.png](/assets/img/writeups/brute-it/1.png)
-**Category:** Linux Challenges / CTF
-**Difficulty:** Easy
+**Category:** Linux Challenges / CTF<br>**Difficulty:** Easy
 
 > **Warning:** Full solutions ahead. Try the room yourself first!
 
@@ -158,7 +157,7 @@ Log into the admin panel at `http://10.112.140.87/admin` using `admin:xavier`.<b
 - The **web flag** — submit it on TryHackMe 
 - An **RSA private key** — this is used to log in via SSH as the user `john`
 
-<br><br>Copy the entire RSA key (starting from `-----BEGIN RSA PRIVATE KEY-----`) and save it to a file on your machine:
+<br>Copy the entire RSA key (starting from `-----BEGIN RSA PRIVATE KEY-----`) and save it to a file on your machine:
 
 ```bash
 nano id_rsa

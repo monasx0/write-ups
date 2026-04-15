@@ -19,7 +19,10 @@ image: /assets/img/writeups/covers/containment.png
 You are a **Security Analyst at West Tech**, a classified defence and R&D contractor. Early this morning, internal monitoring systems flagged unusual network activity originating from the workstation of senior researcher **Oliver Deer**. A ransom note was found on the desktop, suggesting that sensitive project data had been exfiltrated and encrypted.<br><br>Your objectives:
 - Trace attacker's actions across the system
 - Recover the encrypted data
-- Neutralise the threat and retrieve the flag<br><br>You are given two resources:
+- Neutralise the threat and retrieve the flag
+
+
+<br>You are given two resources:
 1. **SSH access** to the affected workstation
 2. **An AI IR assistant** accessible via browser at `http://10.49.140.138:7860` — it has access to the same filesystem and can be queried like a chatbot to help with the investigation
 
@@ -33,7 +36,7 @@ ssh o.deer@10.49.140.138
 
 **Password:** `TryHackMe!.`<br><br>Once logged in, you'll notice a password-protected zip file on the system. We don't know the password yet — that's what we need to find.
 
-> 📷 **[Screenshot: Terminal prompting for zip password]**!![1.png](/assets/img/writeups/containment/2.png)
+![1.png](/assets/img/writeups/containment/2.png)
 
 ---
 
