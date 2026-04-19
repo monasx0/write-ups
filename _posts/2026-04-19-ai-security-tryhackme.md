@@ -1,6 +1,6 @@
 ---
 title: "AI Security Path Completion - TryHackMe"
-date: 2026-04-19 02:00:00 +0000
+date: 2026-04-19 03:00:00 +0000
 categories: [TryHackMe, Blog]
 tags: [ai, ai-security, prompt-injection, jailbreaking]
 image: /assets/img/writeups/ai-security/0.webp
